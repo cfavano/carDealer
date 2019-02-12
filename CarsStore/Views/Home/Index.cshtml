@@ -1,0 +1,48 @@
+﻿@model CarsStore.UI.Models.SpecialsFeaturedCarViewModel
+@{
+    ViewBag.Title = "Home";
+}
+
+<div class="container home">
+    <div class="row">
+            <div id="specials-carousel" class="carousel slide" data-ride="carousel">
+
+                <div class="carousel-inner">
+                    @foreach (var special in Model.Specials.Select((value, i) => new { i, value }))
+                    {
+                      
+                        <div class="carousel-item@(special.i == 0 ? " active" : ""  ) slide-@special.i">
+                            <h3>@special.value.Title</h3>
+                            <p>@special.value.Description</p>
+                        </div>
+                    }
+                </div>
+                <a class="carousel-control-prev" href="#specials-carousel" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#specials-carousel" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class=" col-sm-12">
+            <h2>Featured Vehicles</h2>
+        </div>
+        @foreach (var car in Model.FeaturedCars)
+        {
+            <div class="col-sm-3 ">
+                <a href="/Inventory/Details/@car.CarID" class="text-dark btn featured-car">
+                    <div class="featured-car outline">
+                        <img src="~/Images/Inventory/@car.Picture" class="img-fluid" />
+                        <p class="feature-heading text-center "  >@car.Year @car.Models.Makes.MakeName @car.Models.ModelName </p>
+                        <p class="feature-heading text-center ">@String.Format("{0:C0}", car.SalesPrice)</p>
+                    </div>
+                </a>
+            </div>
+         }
+    </div>

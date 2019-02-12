@@ -1,0 +1,88 @@
+﻿@model CarsStore.UI.Models.CarViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container">
+    <h2>Vehicle Details</h2>
+    <div class="row">
+        <div class="col-sm-12 outline">
+            <div class="col-sm-12">
+                <h4>@Model.Car.Year @Model.Car.Models.Makes.MakeName @Model.Car.Models.ModelName</h4>
+                <div class="row detail-columns">
+                    <div class="col-sm-3">
+                        <img src="~/Images/Inventory/@Model.Car.Picture" class="img-fluid" />
+                    </div>
+                    <div class="col-sm-9">
+                        <div class=" row">
+                            <div class="col-sm-4">
+                                <p class='row'>
+                                    <span class='col-6 text-right font-weight-bold'>Body Style:</span>
+                                    <span class='col-6'>@Model.Car.BodyStyles.BodyStyleName</span>
+                                <p class='row'>
+                                    <span class='col-6 text-right font-weight-bold'>Trans: </span>
+                                    <span class='col-6'>   @Model.Car.Transmissions.TransmissionType</span>
+                                </p>
+                                <p class='row'>
+                                    <span class='col-6 text-right font-weight-bold'> Color:</span>
+                                    <span class='col-6'>@Model.Car.Colors.ColorName</span>
+                                </p>
+                            </div>
+                            <div class="col-sm-4">
+                                <p class='row'>
+                                    <span class='col-4 text-right font-weight-bold'>Interior: </span>
+                                    <span class='col-8'> @Model.Car.Interiors.InteriorColor</span>
+                                </p>
+                                <p class='row'>
+                                    <span class='col-4 text-right font-weight-bold'>
+                                        Mileage:
+                                    </span>
+                                    <span class='col-8'> @(Model.Car.Mileage <= 1000 ? "New" : Model.Car.Mileage.ToString("#,##0")) </span>
+                                </p>
+
+                                <p class='row'>
+                                    <span class='col-4  text-right font-weight-bold'> VIN#:</span>
+                                    <span class='col-8'> @Model.Car.VinID</span>
+                                </p>
+                            </div>
+                            <div class="col-sm-4">
+                                <p class='row'>
+                                    <span class='col-6 text-right font-weight-bold'>  Sales Price: </span>
+                                    <span class='col-6'>@String.Format("{0:C0}", Model.Car.SalesPrice)</span>
+                                </p>
+                                <p class='row'>
+                                    <span class='col-6 text-right font-weight-bold'>  MSRP:</span>
+                                    <span class='col-6'> @String.Format("{0:C0}", Model.Car.MSRP)</span>
+                                </p>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p class="row description">
+                                    <span class="col-2 text-right font-weight-bold">
+                                        Description:
+                                    </span>
+                                    <span class='col-10 '>
+                                        @Model.Car.Description
+                                    </span>
+                                </p>
+                                @if (Model.Car.IsAvailable)
+                                {
+                                    @Html.ActionLink("Contact Us", "Contact", "Home", new { id = Model.Car.VinID }, new { @class = "btn-primary btn float-right" })
+                                }
+                                else
+                                {
+                                    <p class=" float-right btn">Unavailable - Sold </p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

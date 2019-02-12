@@ -1,0 +1,33 @@
+﻿@model CarsStore.UI.Models.UsersListViewModel
+@{
+    ViewBag.Title = "Users";
+}
+<div class="row">
+    <div class="col-12">
+        <h2>Users</h2>
+        @Html.ActionLink("Add a new User", "AddUser", "Admin")
+        <table class="table table-striped add-user">
+            <thead>
+                <tr>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var x in Model.Users)
+                {
+                    <tr>
+                        <td>@x.LastName </td>
+                        <td>@x.FirstName</td>
+                        <td>@x.Email</td>
+                        <td>@x.Role</td>
+                        <td>@Html.ActionLink("Edit", "EditUser", "Admin", new { id = x.ID }, null)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

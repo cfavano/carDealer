@@ -1,0 +1,62 @@
+﻿@model CarsStore.UI.Models.UserViewModel
+@{
+    ViewBag.Title = "Add User";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h2>Add User</h2>
+    </div>
+</div>
+@Html.ValidationSummary()
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-8">
+            <div class="row">
+                <div class="col-6">
+                    <label>First Name</label>
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.FirstName)
+                </div>
+                <div class="col-6">
+                    <label>Last Name</label>
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.LastName)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    @Html.LabelFor(m => m.Email)
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email)
+                </div>
+                <div class="col-6">
+
+                    <label>Role</label>
+                    @Html.DropDownListFor(m => m.RoleName, Model.RoleList, new { @class = "form-control" })
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-6">
+                    <label>Password</label>
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+                <div class="col-6">
+                    <label>Confirm Password</label>
+                    @Html.PasswordFor(m => m.ConfirmedPassword, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ConfirmedPassword)
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <button type="submit" class="btn btn-primary" id="submit-edit-user">Save</button>
+        </div>
+    </div>
+}

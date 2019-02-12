@@ -1,0 +1,74 @@
+﻿@model CarsStore.UI.Models.ContactViewModel
+@{
+    ViewBag.Title = "Contact";
+}
+
+<h2>Contact</h2>
+<div class="row">
+    <div class="col-sm-8">
+        <div class="row">
+            <div class="col-sm-6">
+                @ViewBag.SuccessMessage
+
+                @using (Html.BeginForm("Contact", "Home", FormMethod.Post, new { @class = "form" }))
+                {
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Name)
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+
+                        <span class="text-danger">@Html.ValidationMessageFor(m => m.Name)</span>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email)
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+
+                        <span class="text-danger">@Html.ValidationMessageFor(m => m.Email)</span>
+
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Phone)
+                        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+
+                        <span class="text-danger">@Html.ValidationMessageFor(m => m.Phone)</span>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Message)
+
+                        @if (Model == null)
+                        {
+                            @Html.TextAreaFor(m => m.Message, new { @class = "form-control", rows = 10, columns = 40 })
+                        }
+                        else
+                        {
+                            @Html.TextAreaFor(m => m.Message, new { @class = "form-control", rows = 10, columns = 40 })
+                        }
+                        <span class="text-danger">@Html.ValidationMessageFor(m => m.Message)</span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                }
+            </div>
+            <div class="col-sm-6">
+                <div id="map"></div>
+
+                <p>5424 Paseo Del Norte<br>Carlsbad, CA 92008</p>
+                <p class="sales-phone">Sales: 111-111-1111</p>
+                <p>Service: 111-111-1112</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <script>
+            // Initialize and add the map
+            function initMap() {
+                var uluru = { lat: 33.131609, lng: -117.325038 };
+                var map = new google.maps.Map(
+                    document.getElementById('map'), { zoom: 4, center: uluru });
+                var marker = new google.maps.Marker({ position: uluru, map: map });
+            }
+        </script>
+
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhLpc2dNyA9uEyb6FqexnpMwjZtEz8Brs&callback=initMap">
+        </script>

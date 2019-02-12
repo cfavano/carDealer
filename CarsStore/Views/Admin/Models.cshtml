@@ -1,0 +1,68 @@
+﻿@model CarsStore.UI.Models.ModelsViewModel
+@{
+    ViewBag.Title = "Models";
+}
+
+<h2>Models</h2>
+<div class="outline">
+
+    @using (Html.BeginForm("Models", "Admin", FormMethod.Post, new { @class = "" }))
+    {
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="row">
+                    <div class="col-3 models-view">
+                        <label>New Model</label>
+                    </div>
+                    <div class="col-9">
+                        @Html.TextBoxFor(m => m.ModelToAdd.ModelName, new { @class = "form-control" })
+                        <span class="text-danger">@Html.ValidationMessageFor(m => m.ModelToAdd.ModelName)</span>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="row">
+                    <div class="col-2 models-view">
+                        <label>Make</label>
+                    </div>
+                    <div class="col-10 models-dropdown">
+                        @Html.DropDownListFor(m => m.ModelToAdd.MakeID, Model.MakesList, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <button type="submit" class="btn btn-primary models-button">Save</button>
+
+
+            </div>
+        </div>
+    }
+</div>
+<div class="row">
+    <div class="col-6">
+
+        <table class="table table-striped report">
+            <thead>
+                <tr>
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Date Added</th>
+                    <th>User</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var x in Model.ModelWithUsers)
+                {
+                    <tr>
+                        <td>@x.Model.Makes.MakeName</td>
+                        <td>@x.Model.ModelName</td>
+                        <td>@x.Model.DateAdded.ToString("MM/dd/yyyy")</td>
+                        <td>@x.Email</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

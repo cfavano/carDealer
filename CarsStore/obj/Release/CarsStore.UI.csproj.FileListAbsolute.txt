@@ -1,0 +1,2 @@
+C:\repos\christa-favano-individual-work\CarsStore\CarsStore\obj\Release\CarsStore.UI.csproj.CoreCompileInputs.cache
+C:\repos\christa-favano-individual-work\CarsStore\CarsStore\obj\Release\CarsStore.UI.csprojResolveAssemblyReference.cache

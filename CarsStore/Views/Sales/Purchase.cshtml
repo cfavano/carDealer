@@ -1,0 +1,137 @@
+﻿@model CarsStore.UI.Models.PurchaseViewModel
+@{
+    ViewBag.Title = "Purchase";
+}
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/ViewScripts/addSale.js")"></script>
+}
+
+<h2>Purchase Vehicle </h2>
+<div class="col-sm-12 outline">
+    <div class="row">
+        <div class="col-sm-12">
+            @Model.Car.Year @Model.Car.Models.Makes.MakeName @Model.Car.Models.ModelName
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <p><img src="~Images/Inventory/@Model.Car.Picture" class="img-fluid"/>
+        </div>
+        <div class="col-sm-3">
+            <p>Body Style: @Model.Car.BodyStyles.BodyStyleName</p>
+            <p>
+                Trans: @Model.Car.Transmissions.TransmissionType
+            </p>
+            <p>Color: @Model.Car.Colors.ColorName</p>
+        </div>
+        <div class="col-sm-3">
+            <p>
+                Interior: @Model.Car.Interiors.InteriorColor
+            </p>
+            <p>
+                Mileage: @if (@Model.Car.Mileage <= 1000)
+                { Html.Display("New"); }
+                else
+                {@Model.Car.Mileage.ToString("#,##0")}
+            </p>
+
+            <p> VIN#: <span id="vin">@Model.Car.VinID</span></p>
+        </div>
+        <div class="col-sm-3">
+            <p> Sales Price: @String.Format("{0:C0}", Model.Car.SalesPrice)</p>
+            <p> MSRP: @String.Format("{0:C0}", Model.Car.MSRP)</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="offset-md-3 offset-lg-3 col-9">
+            <p>Description: @Model.Car.Description</p>
+        </div>
+    </div>
+</div>
+<h2>Sales Information</h2>
+<div class="row">
+    <div class="col-8">
+        <div class="row">
+            <div class="col-6">
+                <label>Name</label>
+                @Html.TextBoxFor(m => m.Sale.CustomerName, new { @class = "form-control" })
+                <span class="text-danger">@Html.ValidationMessageFor(m => m.Sale.CustomerName)</span>
+            </div>
+            <div class="col-6">
+                @Html.LabelFor(m => m.Sale.Phone)
+                @Html.TextBoxFor(m => m.Sale.Phone, new { @class = "form-control" })
+                <span class="text-danger">@Html.ValidationMessageFor(m => m.Sale.Phone)</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                @Html.LabelFor(m => m.Sale.Email)
+                @Html.TextBoxFor(m => m.Sale.Email, new { @class = "form-control" })
+                <span class="text-danger">@Html.ValidationMessageFor(m => m.Sale.Email)</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label>Street 1</label>
+                @Html.TextBoxFor(m => m.Sale.Street1, new { @class = "form-control" })
+                <span class="text-danger">@Html.ValidationMessageFor(m => m.Sale.Street1)</span>
+            </div>
+            <div class="col-6">
+                <label>Street 2</label>
+                @Html.TextBoxFor(m => m.Sale.Street2, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                @Html.LabelFor(m => m.Sale.City)
+                @Html.TextBoxFor(m => m.Sale.City, new { @class = "form-control" })
+                <span class="text-danger">@Html.ValidationMessageFor(m => m.Sale.City)</span>
+            </div>
+            <div class="col-6">
+                <label>State</label>
+                @Html.DropDownListFor(m => m.Sale.States.StateID, Model.StateList, new { @class = "form-control dropdown" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label>Zipcode</label>
+                @Html.TextBoxFor(m => m.Sale.Zip, new { @class = "form-control" })
+                <span class="text-danger">@Html.ValidationMessageFor(m => m.Sale.Zip)</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12"><hr></div>
+
+            <div class="col-6">
+                <label>Purchase Price</label>
+                <div class="input-group mb-3">
+
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                    </div>
+                    @Html.TextBoxFor(m => m.Sale.PurchasePrice, new { @class = "form-control" })
+                    <div class="input-group-append">
+                        <span class="input-group-text">.00</span>
+                    </div>
+
+                </div>
+                <span class="text-danger">@Html.ValidationMessageFor(m => m.Sale.PurchasePrice)</span>
+            </div>
+            <div class="col-6">
+                <label>Purchase Type</label>
+                @Html.DropDownListFor(m => m.Sale.Purchases.PurchaseTypeID, Model.PurchaseTypeList, new { @class = "form-control dropdown" })
+            </div>
+        </div>
+
+
+
+
+        @Html.HiddenFor(m => m.Car.CarID)
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary" id="submit-sale">Save</button>
+        </div>
+    </div>
+</div>
+

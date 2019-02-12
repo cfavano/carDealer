@@ -1,0 +1,27 @@
+﻿@model CarsStore.UI.Models.SpecialsViewModel
+@{
+    ViewBag.Title = "Specials";
+}
+
+<h2>Specials</h2>
+
+@foreach (var special in Model.Specials)
+{
+    <div class="row">
+        <div class="col-sm-12">
+            <div class=" outline specials">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <img src="~/Images/dollar-icon.png" class="img-fluid dollar"/>
+                    </div>
+                    <div class="col-sm-10">
+                        <h2>@special.Title</h2>
+                        <p>@special.Description</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+

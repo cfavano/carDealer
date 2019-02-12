@@ -1,0 +1,80 @@
+﻿@model CarsStore.UI.Models.CarListViewModel
+
+
+@section Scripts {
+    <script src="~/Scripts/viewScripts/searchResults.js"></script>
+}
+@{
+    ViewBag.Title = "Admin";
+}
+
+<h2>Admin</h2>
+@Html.ActionLink("Add a new Vehicle", "AddVehicle", "Admin")
+
+<div class="col-12 outline">
+    <h3>Quick Search</h3>
+
+    <div class="row">
+        <div class="col-3">
+
+            @Html.TextBoxFor(m => m.SearchString, new { placeholder = "Enter make, model or year", id = "search", @class = "form-control" })
+        </div>
+
+        <div class="col-5">
+            <div class="row">
+                <div class="col-2 search-label-container">
+                    <label class="float-right font-weight-bold search-label">Price</label>
+                </div>
+
+                @{
+                    var price = new List<SelectListItem>();
+                    for (var i = 5000; i <= 100000; i += 5000)
+                    {
+                        price.Add(new SelectListItem { Text = i.ToString("$#,##0"), Value = i.ToString() });
+                    }
+                }
+
+                <div class="col-5">
+                    @Html.DropDownListFor(m => m.MinPrice, price, "No Min", new { id = "minPrice", @class = "form-control" })
+                </div>
+                <div class="col-5">
+                    @Html.DropDownListFor(m => m.MaxPrice, price, "No Max", new { id = "maxPrice", @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="row">
+                <div class="col-2  search-label-container">
+                    <label class="float-right font-weight-bold  search-label">Year</label>
+                </div>
+
+                @{
+                    var years = new List<SelectListItem>();
+                    for (var i = 2000; i <= 2019; i++)
+                    {
+                        years.Add(new SelectListItem { Text = i.ToString(), Value = i.ToString() });
+                    }
+                }
+                <div class="col-5">
+
+                    @Html.DropDownListFor(m => m.MinPrice, years, "No Min", new { id = "minYear", @class = "form-control" })
+                </div>
+                <div class="col-5">
+                    @Html.DropDownListFor(m => m.MaxPrice, years, "No Max", new { id = "maxYear", @class = "form-control" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <button class="btn btn-primary " id="search-btn" value="Admin/SearchCars">Search</button>
+    </div>
+
+</div>
+
+<h3 class="search-title">Search Results</h3>
+
+<div class="search-results">
+</div>
+
